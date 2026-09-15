@@ -1,16 +1,73 @@
-# React + Vite
+# @indiscret/react-modal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A reusable and accessible React modal component.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Installation
 
-## React Compiler
+Install the package with npm:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install @indiscret/react-modal
+```
 
-## Expanding the ESLint configuration
+## Requirements
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React `^19.2.8`
+- React DOM `^19.2.8`
+
+## Usage
+
+Import the `Modal` component from the package:
+
+```jsx
+import { useState } from "react";
+import { Modal } from "@indiscret/react-modal";
+
+function App() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    return (
+        <>
+            <button onClick={() => setIsModalOpen(true)}>
+                Open Modal
+            </button>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Employee created"
+            >
+                <p>The employee has been successfully created.</p>
+            </Modal>
+        </>
+    );
+}
+
+export default App;
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+| --- | --- | --- | --- |
+| `isOpen` | `boolean` | Yes | Controls whether the modal is visible. |
+| `onClose` | `() => void` | Yes | Callback called when the modal should close. |
+| `children` | `ReactNode` | Yes | Content displayed inside the modal. |
+| `title` | `string` | No | Optional title displayed at the top of the modal. |
+
+## Features
+
+- Close the modal using the close button.
+- Close the modal by pressing `Escape`.
+- Close the modal by clicking the overlay.
+- Trap keyboard focus inside the modal while it is open.
+- Restore focus to the previously focused element when the modal closes.
+- Accessible dialog semantics.
+- Optional modal title.
+
+## License
+
+MIT
+
+
